@@ -10,14 +10,20 @@ def text_analyze(file):
     with open (file, 'r') as text_file:
         letters = 0
         text_reader = text_file.read()
+
+        #split paragraph into sentences
         s = re.split('[.!?]\s+', text_reader)
+
+        #split paragraph into words
         w = re.split('\s+', text_reader)
+
+        #sum of all letters
         for i in w:
             l = len(i)
             letters = letters + l
 
-    words = len(w)
-    sentences = len(s)
+    words = len(w) #word count
+    sentences = len(s) #sentence count
     avg_letters = (letters - 1)/ words
     s_lengths = words / sentences
 
@@ -31,4 +37,4 @@ def text_analyze(file):
     print('-----------------------------------')
 
 for text in file_list:
-    text_analyze(text)
+    text_analyze(text) #call function for each text file
