@@ -5,20 +5,24 @@ import csv
 
 v_tally = list()
 total_votes = 0
-file = 'election_data_2.csv'
+file_list = ['election_data_1.csv', 'election_data_2.csv']
 
-with open (file, 'r') as election_file:
-    election_reader = csv.DictReader(election_file)
+def tally_votes (csv_file):
+    with open (csv_file, 'r') as election_file:
+        election_reader = csv.DictReader(election_file)
 
-# tally total votes
+        # tally total votes
 
-    for line in election_reader:
-        v_tally.append(line['Candidate'])
+        for line in election_reader:
+            v_tally.append(line['Candidate'])
 
 def drawline ():
     for index in range (25):
         print('-', end='')
     print('')
+
+for file_num in file_list:
+    tally_votes(file_num)
 
 drawline()
 print('ELECTION RESULTS')
@@ -39,7 +43,7 @@ with open(d_out, 'w', newline='') as vote_results:
     vote_writer = csv.writer(vote_results)
     header = ['candidate', 'percentage', 'votes']
     vote_writer.writerow(header)
-    for i in range(len(result_ls)):
+    for i in range(len(result_ls)-1):
         v = result_ls[i][1]
         p = (result_ls[i][1]/total_votes)*100
         c = result_ls[i][0]
